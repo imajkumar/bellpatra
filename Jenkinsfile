@@ -11,6 +11,15 @@ pipeline {
                 git credentialsId: 'CICD', url: 'https://github.com/imajkumar/bellpatra.git', branch: 'main'
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube') {
+                        sh 'sonar-scanner'
+                    }
+                }
+            }
+        }
         // stage('Kill Docker Containers Using Port') {
         //     steps {
         //         script {
