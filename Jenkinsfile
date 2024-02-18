@@ -4,13 +4,15 @@ pipeline {
     environment {
         DOCKER_REGISTRY_CREDENTIALS = 'docker-hub-credentials'
         DOCKER_IMAGE = 'imajkumar/bellpatra'
+        DOCKER_TAG = "${env.BUILD_NUMBER}"
+
     }
 
     stages {
         stage('Build') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}:${BUILD_NUMBER}", '.')
+                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}", '.')
                 }
             }
         }
