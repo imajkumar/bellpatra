@@ -1,36 +1,24 @@
 pipeline {
     agent any
-    
+
     environment {
-        // Define environment variables such as Docker credentials
-        DOCKER_CREDENTIALS = credentials('docker-hub-credentials') // You should define this credential in Jenkins
-        DOCKER_IMAGE = 'bellpatra' // Replace with your Docker image name
-        DOCKER_REGISTRY = 'docker.io' // Replace with your Docker registry
+        DOCKER_IMAGE = 'imajkumar/bellpatra:latest'
     }
-    
+
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout source code from your SCM (e.g., Git)
-                git 'https://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@github.com/imajkumar/bellpatra.git'
-            }
-        }
-        
         stage('Build Docker Image') {
             steps {
-                // Build Docker image
                 script {
-                    docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}")
+                    docker.build(DOCKER_IMAGE)
                 }
             }
         }
         
-        stage('Push Docker Image') {
+        stage('Push to Docker Hub') {
             steps {
-                // Push Docker image to registry
                 script {
-                    docker.withRegistry("${DOCKER_REGISTRY}", "${DOCKER_CREDENTIALS}") {
-                        docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE}").push()
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        docker.image(DOCKER_IMAGE).push('latest')
                     }
                 }
             }
