@@ -2,7 +2,6 @@ version: '3'
 
 services:
   node_api:
-    container_name: bellpatraContainer
     image: docker pull imajkumar/bellpatra:latest
     ports:
       - "3000:3000"
