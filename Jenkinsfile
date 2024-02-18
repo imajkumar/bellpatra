@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY_CREDENTIALS = 'docker-hub-credentials'
         DOCKER_IMAGE = 'imajkumar/bellpatra'
-        DOCKER_TAG = "${env.BUILD_NUMBER}"
+        DOCKER_TAG = "v1.0"
 
     }
 
