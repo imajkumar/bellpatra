@@ -6,7 +6,7 @@ const PORT = process.env.PORT ?? 3000;
 // Define Routes
 app.get("/", (req, res) =>
   res.json({
-    message: "Hello from Express Server imajkmar 👋🏻",
+    message: "Hello from Express Server 👋🏻",
   })
 );
 
