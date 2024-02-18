@@ -14,7 +14,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 
-                    sh "docker build -t bellpatra ."
+                    sh "docker build -t imajkumar/bellpatra ."
                 
             }
         }
