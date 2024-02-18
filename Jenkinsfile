@@ -11,7 +11,6 @@ pipeline {
                 git credentialsId: 'CICD', url: 'https://github.com/imajkumar/bellpatra.git', branch: 'main'
             }
         }
-        stages {
         stage('Kill Docker Containers Using Port') {
             steps {
                 script {
@@ -28,7 +27,6 @@ pipeline {
                 }
             }
         }
-    }
         stage('Build Docker Image') {
             steps {
                 
