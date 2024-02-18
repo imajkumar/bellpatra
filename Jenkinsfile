@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout source code from your SCM (e.g., Git)
-                git 'https://github.com/imajkumar/bellpatra.git'
+                git 'https://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@github.com/imajkumar/bellpatra.git'
             }
         }
         
