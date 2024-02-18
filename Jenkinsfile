@@ -29,8 +29,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                    docker.image("imajkumar/bellpatra").run("-p 3000:3000 --rm -d imajkumar/bellpatra")
-
+                        sh "docker run -d -p 3000:3000 imajkumar/bellpatra"
             }
         }
     }
