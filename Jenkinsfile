@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git credentialsId: 'imajkumar', url: 'https://github.com/imajkumar/bellpatra.git', branch: 'main'
+                git credentialsId: 'CICD', url: 'https://github.com/imajkumar/bellpatra.git', branch: 'main'
             }
         }
         stage('Build Docker Image') {
