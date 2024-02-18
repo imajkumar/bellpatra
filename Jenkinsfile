@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Deploy to Docker Hub') {
             steps {
-               sh docker run -d imajkumar/bellpatra
+               sh "docker run -d imajkumar/bellpatra"
 
             }
         }
