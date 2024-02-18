@@ -1,7 +1,7 @@
-version: '3'
+version: '3.3'
 
 services:
-  node_api:
-    image: docker pull imajkumar/bellpatra:latest
+  web:
+    image: imajkumar/bellpatra:latest
     ports:
       - "3000:3000"
