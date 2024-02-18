@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Deploy to Docker Hub') {
             steps {
-               sh "docker run -d imajkumar/bellpatra"
+                    docker.image("imajkumar/bellpatra").run("-p 3000:3000 --rm -d imajkumar/bellpatra")
 
             }
         }
