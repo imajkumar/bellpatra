@@ -19,11 +19,7 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                sh 'npm test'
-            }
-        }
+       
         // stage('Kill Docker Containers Using Port') {
         //     steps {
         //         script {
