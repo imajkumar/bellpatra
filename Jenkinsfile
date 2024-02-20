@@ -3,6 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'imajkumar/bellpatra:latest'
+        SONAR_HOST_URL = 'http://165.232.179.163:9000' // Update with your SonarQube server URL
+        SONAR_LOGIN = credentials('sonar')
     }
 
     stages {
@@ -11,16 +13,15 @@ pipeline {
                 git credentialsId: 'CICD', url: 'https://github.com/imajkumar/bellpatra.git', branch: 'main'
             }
         }
-       stage('SonarQube analysis') {
+      stage('Install Dependencies') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube"
-                }
+                sh 'npm install'
             }
         }
-        stage("Quality gate") {
+
+        stage('Run Tests') {
             steps {
-                waitForQualityGate abortPipeline: true
+                sh 'npm test'
             }
         }
         // stage('Kill Docker Containers Using Port') {
