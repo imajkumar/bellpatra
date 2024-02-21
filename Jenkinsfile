@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE = 'imajkumar/bellpatra:latest'
         SONAR_HOST_URL = 'http://165.232.179.163:9000' // Update with your SonarQube server URL
         SONAR_LOGIN = credentials('sonar')
-        SONARQUBE_HOME = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        SONARQUBE_HOME = tool name: 'SonarScanner', type: 'http://165.232.179.163:9000'
 
     }
 
