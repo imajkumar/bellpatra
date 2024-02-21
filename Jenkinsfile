@@ -5,6 +5,8 @@ pipeline {
         DOCKER_IMAGE = 'imajkumar/bellpatra:latest'
         SONAR_HOST_URL = 'http://165.232.179.163:9000' // Update with your SonarQube server URL
         SONAR_LOGIN = credentials('sonar')
+        SONARQUBE_HOME = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+
     }
 
     stages {
@@ -13,18 +15,23 @@ pipeline {
                 git credentialsId: 'CICD', url: 'https://github.com/imajkumar/bellpatra.git', branch: 'main'
             }
         }
-      stage('Install Dependencies') {
+      stage('Build') {
             steps {
+                // Assuming you have Node.js tools configured, you can run npm install and other necessary commands here
                 sh 'npm install'
             }
         }
-
-       stage('SonarQube Analysis') {
-            def scannerHome = tool 'SonarScanner';
-            withSonarQubeEnv() {
-            sh "${scannerHome}/bin/sonar-scanner"
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQubeServer') {
+                        sh "${SONARQUBE_HOME}/bin/sonar-scanner"
+                    }
+                }
             }
         }
+
+      
         // stage('Kill Docker Containers Using Port') {
         //     steps {
         //         script {
