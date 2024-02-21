@@ -3,11 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'imajkumar/bellpatra:latest'
-        SONAR_HOST_URL = 'http://165.232.179.163:9000' // Update with your SonarQube server URL
-        SONAR_LOGIN = credentials('sonar')
-        SONARQUBE_HOME = tool name: 'SonarScanner', type: 'http://165.232.179.163:9000'
-
-    }
+        SONARQUBE_HOME = tool 'SonarScanner'
+        }
 
     stages {
         stage('Clone Repository') {
@@ -21,7 +18,7 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('SonarQube Analysis') {
+         stage('SonarQube Analysis') {
             steps {
                 script {
                     withSonarQubeEnv('SonarQubeServer') {
@@ -30,7 +27,6 @@ pipeline {
                 }
             }
         }
-
       
         // stage('Kill Docker Containers Using Port') {
         //     steps {
