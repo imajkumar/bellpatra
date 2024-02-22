@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'imajkumar/bellpatra:latest'
-        SONARQUBE_HOME = tool 'SonarScanner'
         }
 
     stages {
@@ -12,22 +11,9 @@ pipeline {
                 git credentialsId: 'CICD', url: 'https://github.com/imajkumar/bellpatra.git', branch: 'main'
             }
         }
-      stage('Build') {
-            steps {
-                // Assuming you have Node.js tools configured, you can run npm install and other necessary commands here
-                sh 'npm install'
-            }
-        }
-         stage('SonarQube Analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv('SonarQubeServer') {
-                        sh "${SONARQUBE_HOME}/bin/sonar-scanner"
-                    }
-                }
-            }
-        }
-      
+
+
+
         // stage('Kill Docker Containers Using Port') {
         //     steps {
         //         script {
@@ -46,12 +32,12 @@ pipeline {
         // }
         stage('Build Docker Image') {
             steps {
-                
+
                     sh "docker build -t imajkumar/bellpatra ."
-                
+
             }
         }
-        
+
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
