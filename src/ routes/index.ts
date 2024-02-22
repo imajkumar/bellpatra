@@ -1,17 +1,17 @@
-import express,{Request, Response} from "express";
-import redisClient from '../utils/connectRedis'
+import express, { Request, Response } from "express";
+import redisClient from "../utils/connectRedis";
 
 var router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req: Request, res: Response) {
-  res.send("API : HOME ");
+  res.send("API : HOME test ok ");
 });
-router.get('/checkme', async (req:Request,res:Response) => {
-  const message = await redisClient.get('try');
+router.get("/checkme", async (req: Request, res: Response) => {
+  const message = await redisClient.get("try");
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     message,
   });
 });
