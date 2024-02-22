@@ -17,12 +17,12 @@ const connectRedis_1 = __importDefault(require("../utils/connectRedis"));
 var router = express_1.default.Router();
 /* GET home page. */
 router.get("/", function (req, res) {
-    res.send("API : HOME ");
+    res.send("API : HOME test ok ");
 });
-router.get('/checkme', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const message = yield connectRedis_1.default.get('try');
+router.get("/checkme", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const message = yield connectRedis_1.default.get("try");
     res.status(200).json({
-        status: 'success',
+        status: "success",
         message,
     });
 }));

@@ -1,5 +1,5 @@
 require("dotenv").config();
-import express, { NextFunction,Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import config from "config";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -12,7 +12,7 @@ import AppError from "./utils/appError";
 import validateEnv from "./utils/validateEnv";
 
 import indexRouter from "./ routes/index";
-import apiRouter  from './ routes/api';
+import apiRouter from "./ routes/api";
 
 AppDataSource.initialize()
   .then(async () => {
@@ -37,12 +37,12 @@ AppDataSource.initialize()
     //Route Prefixes
     app.use("/", indexRouter);
     app.use("/apiV1/", apiRouter);
-    
+
     // UNHANDLED ROUTE
-    app.all("*", (req: Request, res: Response,next:NextFunction) => {
+    app.all("*", (req: Request, res: Response, next: NextFunction) => {
       res.send(new AppError(404, `Route ${req.originalUrl} not found`));
       next();
-    }); 
+    });
     // GLOBAL ERROR HANDLER
     app.use(
       (error: AppError, req: Request, res: Response, next: NextFunction) => {
@@ -53,13 +53,13 @@ AppDataSource.initialize()
           status: error.status,
           message: error.message,
         });
-      }
+      },
     );
 
     const port = config.get<number>("port");
-    const HOST = '0.0.0.0';
+    const HOST = "0.0.0.0";
 
-    app.listen(port, () => {
+    app.listen(port, HOST, () => {
       console.log(`Server is running on port ${port}`);
     });
   })

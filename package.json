@@ -39,7 +39,7 @@
     "@types/morgan": "^1.9.6",
     "@types/multer": "^1.4.8",
     "@types/node": "^20.8.0",
-    "config": "^3.3.9",
+    "config": "^3.3.11",
     "morgan": "^1.10.0",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
