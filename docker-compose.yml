@@ -1,13 +1,5 @@
 version: "3.8"
 services:
-  node_app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    volumes:
-      - ".:/app"
   postgres:
     image: postgres:latest
     container_name: my_postgres

@@ -49,7 +49,12 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                        sh "docker-compose -f docker-compose.yml down && docker-compose -f docker-compose.yml up -d"
+                        sh "docker-compose -f docker-compose.yml up -d"
+            }
+        }
+         stage('Deploy APP') {
+            steps {
+                        sh "docker-compose -f docker-compose.yml-node down && docker-compose -f docker-compose-node.yml up -d"
             }
         }
     }
