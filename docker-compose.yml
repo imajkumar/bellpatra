@@ -1,63 +1,6 @@
-version: "3.3"
-
+version: "3.4"
 services:
-  sonarqube:
-    image: sonarqube:latest
-    container_name: sonarqube
-    ports:
-      - "9000:9000"
-    environment:
-      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/postgres
-      - SONARQUBE_JDBC_USERNAME=postgres
-      - SONARQUBE_JDBC_PASSWORD=postgres
-    volumes:
-      - sonarqube_data:/opt/sonarqube/data
-      - sonarqube_extensions:/opt/sonarqube/extensions
-      - sonarqube_logs:/opt/sonarqube/logs
-      - sonarqube_temp:/opt/sonarqube/temp
-    depends_on:
-      - postgres
-  NODEAPI:
+  backend-api:
     image: imajkumar/bellpatra:latest
     ports:
-      - "3001:3000"
-  # PostgreSQL Database
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - database_network
-
-  # pgAdmin
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "5050:80"
-    depends_on:
-      - postgres
-    networks:
-      - database_network
-
-  # Redis
-  redis:
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    networks:
-      - database_network
-
-networks:
-  database_network:
-volumes:
-  sonarqube_data:
-  sonarqube_extensions:
-  sonarqube_logs:
-  sonarqube_temp:
+      - "3000:3000"
