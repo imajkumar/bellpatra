@@ -8,21 +8,30 @@ services:
       - "3000:3000"
     volumes:
       - ".:/app"
-    postgres:
-      image: "postgres:latest"
-      environment:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: postgres
-      ports:
-        - "5432:5432"
-      networks:
-        - database_network
-      redis:
-        image: "redis:latest"
-        ports:
-          - "6379:6379"
-        networks:
-          - database_network
+  postgres:
+    image: "postgres:latest"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
     networks:
-      database_network: null
+      - database_network
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - database_network
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    networks:
+      - database_network
