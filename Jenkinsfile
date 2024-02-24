@@ -52,5 +52,13 @@ pipeline {
                         sh "docker-compose up -d --build"
             }
         }
+        post {
+        always {
+            script {
+                // Stop and remove containers after deployment
+                sh 'docker-compose down'
+            }
+        }
+    }
     }
 }
