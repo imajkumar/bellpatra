@@ -1,5 +1,22 @@
-version: "3.8"
+version: "3.3"
+
 services:
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/postgres
+      - SONARQUBE_JDBC_USERNAME=postgres
+      - SONARQUBE_JDBC_PASSWORD=postgres
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_temp:/opt/sonarqube/temp
+    depends_on:
+      - postgres
   node_app:
     build:
       context: .
@@ -8,8 +25,9 @@ services:
       - "3000:3000"
     volumes:
       - ".:/app"
+  # PostgreSQL Database
   postgres:
-    image: "postgres:latest"
+    image: postgres:latest
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -18,6 +36,8 @@ services:
       - "5432:5432"
     networks:
       - database_network
+
+  # pgAdmin
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -29,9 +49,19 @@ services:
       - postgres
     networks:
       - database_network
+
+  # Redis
   redis:
-    image: "redis:latest"
+    image: redis:latest
     ports:
       - "6379:6379"
     networks:
       - database_network
+
+networks:
+  database_network:
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonarqube_temp:
