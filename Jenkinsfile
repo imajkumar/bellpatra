@@ -30,6 +30,14 @@ pipeline {
         //         }
         //     }
         // }
+         stage('Remove All images and container') {
+            steps {
+
+                    sh "docker rm -v -f $(docker ps -qa)"
+                    sh "docker rm -v -f $(docker images -qa)"
+
+            }
+        }
         stage('Build Docker Image') {
             steps {
 
