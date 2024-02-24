@@ -3,7 +3,7 @@ import { Router } from "express";
 const router = Router();
 
 router.get("/", (req, res) =>
-  res.json({ message: "Hello from Docker v39 🎉" }),
+  res.json({ message: "Hello from Docker v399 🎉" }),
 );
 
 router.get("/health", (req, res) => {
