@@ -47,8 +47,15 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy stop') {
             steps {
+                        sh "docker-compose -f docker-compose-web.yml down"
+            }
+        }
+         stage('Deploy stop') {
+            steps {
+                    sh "docker-compose -f docker-compose-web.yml up -d"
+
                         sh "docker-compose up -d"
             }
         }
