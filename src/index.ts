@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { corsOptions } from "./utils/corsOptions";
 
 import { AppDataSource } from "./database/configdb";
+import validateEnv from "./utils/validateEnv";
 
 import indexRouter from "./routes/index"
 
@@ -13,16 +14,24 @@ const PORT = process.env.PORT ?? 3000;
 
 AppDataSource.initialize()
   .then(() => {
-    console.log("Database connected");
-    console.log("Data Source has been initialized!");
-    const app = express();
-    app.use(cors(corsOptions));
+      // VALIDATE ENV
+      validateEnv();
+      console.log("Data Source has been initialized!");
+      const app = express();
+      // 2. Logger
+      if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
+  
+      // Cross Origin Resource Sharing
+      app.use(cors(corsOptions));
+  
+      // built-in middleware to handle urlencoded form data
+      app.use(express.urlencoded({ extended: false }));
+      // built-in middleware for json
+  
+      app.use(express.json({ limit: "10kb" }));
+      //middleware for cookies
 
-    // built-in middleware to handle urlencoded form data
-    app.use(express.urlencoded({ extended: false }));
-    // built-in middleware for json
-
-    app.use(express.json({ limit: "10kb" }));
+   
     //middleware for cookies
     app.use(cookieParser());
 
