@@ -4,7 +4,7 @@ const router = Router();
 
 router.get("/", (req, res) =>
   res.json({
-    message: "Hello from Docker this is ay96ra  🎉",
+    message: "Hello from Docker this is ok  🎉",
   }),
 );
 
