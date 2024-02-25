@@ -13,7 +13,7 @@ AppDataSource.initialize()
       console.log(`Server running on port ${PORT}`);
     });
   })
-  .catch((err) => {
+  .catch((err:any) => {
     console.log(err);
     process.exit(1);
   });
