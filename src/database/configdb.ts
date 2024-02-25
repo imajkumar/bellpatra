@@ -1,2 +1,2 @@
-import * as dotenv from "dotenv";
-console.log(99);
+import { DataSource } from "typeorm";
+console.log(DataSource);
