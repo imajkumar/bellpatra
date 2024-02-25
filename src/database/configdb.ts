@@ -1,2 +1,1 @@
-import { DataSource } from "typeorm";
-console.log(DataSource);
+import { createConnection } from 'typeorm';
