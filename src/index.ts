@@ -1,7 +1,8 @@
+require("dotenv").config();
 import express from "express";
 import { AppDataSource } from "./database/configdb";
 
-import indexRouter from "./routes/index";
+import indexRouter from "./routes/index"
 
 const PORT = process.env.PORT ?? 3000;
 
