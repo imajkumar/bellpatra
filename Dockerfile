@@ -4,6 +4,8 @@ FROM node:18 as builder
 
 WORKDIR /build
 
+RUN npm install -g ts-node-dev
+
 COPY package*.json ./
 RUN npm install
 
