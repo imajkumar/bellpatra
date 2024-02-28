@@ -1,4 +1,3 @@
-require("dotenv").config();
 import jwt, { SignOptions } from "jsonwebtoken";
 import config from "config";
 
@@ -7,7 +6,7 @@ export const signJwt = (
   keyName: "accessTokenPrivateKey" | "refreshTokenPrivateKey",
   options: SignOptions
 ) => {
-  return jwt.sign(payload, 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUZ3d0RRWUpLb1pJaHZjTkFRRUJCUUFEU3dBd1NBSkJBSjdVblpyNUxpUGJxbDRENlo3VHVKK2NFMkI0Y3Fzbgp1M3lCWlB6NjZramQ4SU9URXY5TUpEdmhMQ05PczYyWHBZcmFZYU5HS3UrN3Q4YVVjcWNoRzJNQ0F3RUFBUT09Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQ==');
+  return jwt.sign(payload, config.get<string>("accessTokenPublicKey"));
 };
 
 export const verifyJwt = <T>(
@@ -18,7 +17,7 @@ export const verifyJwt = <T>(
     
     const decoded = jwt.verify(
       token,
-      'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUZ3d0RRWUpLb1pJaHZjTkFRRUJCUUFEU3dBd1NBSkJBSjdVblpyNUxpUGJxbDRENlo3VHVKK2NFMkI0Y3Fzbgp1M3lCWlB6NjZramQ4SU9URXY5TUpEdmhMQ05PczYyWHBZcmFZYU5HS3UrN3Q4YVVjcWNoRzJNQ0F3RUFBUT09Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQ=='
+      config.get<string>("accessTokenPublicKey")
     ) as T;
 
     return decoded;
